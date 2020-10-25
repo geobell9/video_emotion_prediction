@@ -25,7 +25,6 @@ def main():
         frame = cap.read()[1]       
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        #write bounding box on image
         pts = np.array([[bounding_box[0][0],bounding_box[0][1]],[bounding_box[1][0],bounding_box[1][1]],[bounding_box[2][0],bounding_box[2][1]],[bounding_box[3][0],bounding_box[3][1]]], np.int32)
         pts = pts.reshape((-1,1,2))
         img = cv2.polylines(gray,[pts],True,(0,255,255))
