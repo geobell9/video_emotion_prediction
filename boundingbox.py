@@ -3,7 +3,7 @@ from cv2 import cv2
 import os.path
 
 
-VIDEO_NUMBER = 105
+VIDEO_NUMBER = 102
 BOUNDING_BOX_PATH = ".\\bounding-boxes"
 ANNOTATIONS_PATH =  ".\\annotations"
 
@@ -74,5 +74,5 @@ def load_annotations(path):
         lines = [line.strip() for line in file]
     return lines
 
-
-main()
+if __name__ == '__main__':
+    main()
