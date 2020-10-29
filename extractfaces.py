@@ -7,6 +7,8 @@ from pathlib import Path
 VIDEO_NUMBER = 105
 BOUNDING_BOX_PATH = ".\\bounding-boxes"
 ANNOTATIONS_PATH =  ".\\annotations"
+VALENCE_CLASS_EDGES = [-1,0,0.1915,1]
+AROUSAL_CLASS_EDGES = [-1,0.1315,0.3295,1]
 
 def main():
     #load annotations
@@ -33,25 +35,25 @@ def main():
         valence_value = float(valence_annotations[frame_number])
         arousal_value = float(arousal_annotations[frame_number])
         #save crop to path based on valence value
-        if valence_value <= -1 and valence_value < -0.5:
+        if valence_value >= VALENCE_CLASS_EDGES[0] and valence_value < VALENCE_CLASS_EDGES[1]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\low\\").mkdir(parents=True, exist_ok=True)#create directory path if it doesnt exist
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\low\\"+str(frame_number)+".png",crop_img)
-        elif valence_value <= -0.5 and valence_value < 0.5:
+        elif valence_value >= VALENCE_CLASS_EDGES[1] and valence_value < VALENCE_CLASS_EDGES[2]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\neutral\\").mkdir(parents=True, exist_ok=True)
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\neutral\\"+str(frame_number)+".png",crop_img)
-        elif valence_value <= 0.5 and valence_value <= 1:
+        elif valence_value >= VALENCE_CLASS_EDGES[2] and valence_value <= VALENCE_CLASS_EDGES[3]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\high\\").mkdir(parents=True, exist_ok=True)
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\valence\\high\\"+str(frame_number)+".png",crop_img)
         else:
             print("error writing valence image crop")
         #save crop to path based on arousal value
-        if arousal_value <= -1 and arousal_value < -0.5:
+        if arousal_value >= AROUSAL_CLASS_EDGES[0] and arousal_value < AROUSAL_CLASS_EDGES[1]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\low\\").mkdir(parents=True, exist_ok=True)
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\low\\"+str(frame_number)+".png",crop_img)
-        elif arousal_value <= -0.5 and arousal_value < 0.5:
+        elif arousal_value >= AROUSAL_CLASS_EDGES[1] and arousal_value < AROUSAL_CLASS_EDGES[2]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\neutral\\").mkdir(parents=True, exist_ok=True)
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\neutral\\"+str(frame_number)+".png",crop_img)
-        elif arousal_value <= 0.5 and arousal_value <= 1:
+        elif arousal_value >= AROUSAL_CLASS_EDGES[2] and arousal_value <= AROUSAL_CLASS_EDGES[3]:
             Path(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\high\\").mkdir(parents=True, exist_ok=True)
             cv2.imwrite(".\\faces"+"\\"+str(VIDEO_NUMBER)+"\\arousal\\high\\"+str(frame_number)+".png",crop_img)
         else:

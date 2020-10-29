@@ -3,6 +3,7 @@ from cv2 import cv2
 import os.path
 
 
+
 VIDEO_NUMBER = 102
 BOUNDING_BOX_PATH = ".\\bounding-boxes"
 ANNOTATIONS_PATH =  ".\\annotations"
